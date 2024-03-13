@@ -1,1 +1,21 @@
-{}
+{
+  "companyInfo": {
+    "name": "주식회사 팀스파르타",
+    "desctiption": "우리회사의 건물이 참 독특하죠?",
+    "image": "https://wimg.mk.co.kr/meet/neds/2016/11/image_readmed_2016_818972_14800385382694583.jpg"
+  },
+  "todos": [
+    {
+      "id": "1",
+      "title": "커피 마시기",
+      "contents": "아메리카노 마시기",
+      "isDone": false
+    },
+    {
+      "id": "2",
+      "title": "테스트",
+      "contents": "테스트를 해봤다",
+      "isDone": true
+    }
+  ]
+}
