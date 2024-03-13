@@ -1,5 +1,5 @@
 export async function GET(request: Request) {
-  const response = await fetch("http://localhost:4000/todos");
+  const response = await fetch(`http://localhost:4000/todos`);
   const todos = await response.json();
 
   if (!todos) {
@@ -14,10 +14,10 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
-  // body에서 값을 뽑아오기
-  const { title, contents } = await request.json();
+  const { title, contents }: { title: string; contents: string } =
+    await request.json();
 
-  const response = await fetch("http://localhost:4000/todos", {
+  const response = await fetch(`http://localhost:4000/todos`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -28,12 +28,10 @@ export async function POST(request: Request) {
 
   const todo = await response.json();
 
-  return Response.json({
-    todo,
-  });
+  return Response.json({ todo });
 }
 export async function PATCH(request: Request) {
-  const { id, isDone } = await request.json();
+  const { id, isDone }: { id: string; isDone: boolean } = await request.json();
   const response = await fetch(`http://localhost:4000/todos/${id}`, {
     method: "PATCH",
     headers: {
