@@ -1,17 +1,25 @@
 "use client";
-import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import TodoList from "@/components/todo/TodoList";
+import TodoForm from "@/components/todo/TodoForm";
+import { useRouter } from "next/navigation";
 
 function TodoCSRPage() {
-  const { data: todos } = useQuery({
-    queryKey: ["todos"],
-    queryFn: async () => {
-      const response = await fetch(`http://localhost:4000/todos`);
-      const todos = response.json();
-      return todos;
-    },
-  });
-  return <div>TodoCSRPage</div>;
+  const router = useRouter();
+  return (
+    <div>
+      <TodoForm />
+      <TodoList isActive={false} />
+      <TodoList isActive={true} />
+      <button
+        onClick={() => {
+          router.push("/report");
+        }}
+      >
+        할일정보통계보러가기
+      </button>
+    </div>
+  );
 }
 
 export default TodoCSRPage;

@@ -14,7 +14,7 @@ function AboutPages() {
     queryFn: getCompanyInfo,
   });
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div>로딩중....</div>;
   if (isError) return <div>Error fetching data</div>;
   return (
     <div>

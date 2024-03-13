@@ -16,6 +16,9 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   const { title, contents }: { title: string; contents: string } =
     await request.json();
+  if (!title || !contents) {
+    return new Response("제목과 내용을 입력해주세요", { status: 400 });
+  }
 
   const response = await fetch(`http://localhost:4000/todos`, {
     method: "POST",
