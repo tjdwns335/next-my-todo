@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 function TodoCSRPage() {
   const router = useRouter();
   return (
-    <div>
+    <div className="w-4/5 m-auto">
       <TodoForm />
       <TodoList isActive={false} />
       <TodoList isActive={true} />

@@ -1,5 +1,6 @@
 "use client";
 import { getCompanyInfo } from "@/app/queryFunction";
+import { aboutStyle } from "@/app/style";
 import { companyInfo } from "@/app/types";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
@@ -17,18 +18,27 @@ function AboutPages() {
   if (isLoading) return <div>로딩중....</div>;
   if (isError) return <div>Error fetching data</div>;
   return (
-    <div>
+    <>
       {companyInfo && (
-        <>
-          <h1>{companyInfo.name}</h1>
-          <p>{companyInfo.description}</p>
-          <img
-            src={companyInfo.image}
-            alt="회사이미지"
-          />
-        </>
+        <div className={aboutStyle.wrapStyle}>
+          <div className={aboutStyle.contentStyle}>
+            <h1 className={aboutStyle.titleStyle}>
+              회사명 : {companyInfo.name}
+            </h1>
+            <p className={aboutStyle.infoStyle}>
+              회사 소개 : {companyInfo.description}
+            </p>
+          </div>
+          <div className={aboutStyle.imgWrap}>
+            <img
+              className={aboutStyle.imgStyle}
+              src={companyInfo.image}
+              alt="회사이미지"
+            />
+          </div>
+        </div>
       )}
-    </div>
+    </>
   );
 }
 

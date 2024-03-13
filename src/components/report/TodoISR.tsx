@@ -1,3 +1,4 @@
+import { reportStyle } from "@/app/style";
 import { Todos } from "@/app/types";
 
 const TodoISR = async () => {
@@ -10,10 +11,13 @@ const TodoISR = async () => {
   const doList = todos.filter((todo) => todo.isDone === false);
   const doneList = todos.filter((todo) => todo.isDone === true);
   return (
-    <div>
-      <p>
-        현재까지 {doList.length}개의 할 일 리스트, {doneList.length} 개의 완료
-        리스트가 존재합니다.
+    <div className={reportStyle.wrapStyle}>
+      <h1 className={reportStyle.titleStyle}>⭐Todo-List 현재 현황⭐</h1>
+      <p className={reportStyle.textStyle}>
+        현재까지 <span className={reportStyle.spanStyle}>{doList.length}</span>
+        &nbsp;개의 할 일 리스트, &nbsp;
+        <span className={reportStyle.spanStyle}>{doneList.length}</span> 개의
+        완료 리스트가 존재합니다.
       </p>
     </div>
   );

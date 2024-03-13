@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
 import QueryProvider from "./provider";
+import { layoutStyle } from "./style";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,11 +21,31 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <QueryProvider>
-          <nav>
-            <Link href="/">About</Link>
-            <Link href="/report">Report</Link>
-            <Link href="/todoCSR">Todos-CSR</Link>
-            <Link href="/todoSSR">Todos-SSR</Link>
+          <nav className={layoutStyle.navStyle}>
+            <Link
+              className={layoutStyle.LinkStyle}
+              href="/"
+            >
+              About
+            </Link>
+            <Link
+              className={layoutStyle.LinkStyle}
+              href="/report"
+            >
+              Report
+            </Link>
+            <Link
+              className={layoutStyle.LinkStyle}
+              href="/todoCSR"
+            >
+              Todos-CSR
+            </Link>
+            <Link
+              className={layoutStyle.LinkStyle}
+              href="/todoSSR"
+            >
+              Todos-SSR
+            </Link>
           </nav>
           {children}
         </QueryProvider>
