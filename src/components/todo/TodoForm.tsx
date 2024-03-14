@@ -2,6 +2,7 @@
 import { newTodoMutationFunction } from "@/app/queryFunction";
 import { formStyle } from "@/app/style";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { kMaxLength } from "buffer";
 import React, { useState } from "react";
 
 function TodoForm() {
@@ -24,10 +25,9 @@ function TodoForm() {
       { title, contents, isDone: false },
       {
         onSuccess: () => {
+          queryClient.invalidateQueries({ queryKey: ["todos"] });
           setTitle("");
           setContents("");
-
-          queryClient.invalidateQueries({ queryKey: ["todos"] });
         },
       }
     );
@@ -43,6 +43,7 @@ function TodoForm() {
           id="title"
           type="text"
           value={title}
+          maxLength={8}
           placeholder="제목을 입력해주세요"
           className={formStyle.inputStyle}
           onChange={(e) => setTitle(e.target.value)}
@@ -57,12 +58,13 @@ function TodoForm() {
           id="contents"
           type="text"
           value={contents}
+          maxLength={12}
           placeholder="내용을 입력해주세요"
           className={formStyle.inputStyle}
           onChange={(e) => setContents(e.target.value)}
         />
       </div>
-      <button className="p-4 ml-4 bg-amber-300 text-sky-950">추가하기</button>
+      <button className={formStyle.addButton}>추가하기</button>
     </form>
   );
 }

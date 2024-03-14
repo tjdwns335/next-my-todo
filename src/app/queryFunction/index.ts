@@ -1,4 +1,4 @@
-import { TodoData, Todos, companyInfo } from "../types";
+import { TodoData, Todos, companyInfo, newTodo } from "../types";
 
 export const getCompanyInfo = async (): Promise<companyInfo> => {
   const response = await fetch("http://localhost:4000/companyInfo");
@@ -47,4 +47,26 @@ export const deleteTodoMutationFunction = async (id: string) => {
       "Content-Type": "application/json",
     },
   });
+};
+
+export const getTodoById = async (id: string): Promise<Todos[]> => {
+  const response = await fetch(`http://localhost:4000/todos/${id}`);
+  if (!response.ok) {
+    throw new Error("Failed to fetch todo");
+  }
+  const todo = await response.json();
+  return [todo];
+};
+
+export const changeTodo = async (params: { id: string; newTodo: newTodo }) => {
+  const { id, newTodo } = params;
+  const response = await fetch(`http://localhost:4000/todos/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(newTodo),
+  });
+  const todo = await response.json();
+  return todo;
 };

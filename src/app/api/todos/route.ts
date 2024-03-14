@@ -29,9 +29,12 @@ export async function POST(request: Request) {
     body: JSON.stringify({ title, contents, isDone: false }),
   });
 
-  const todo = await response.json();
+  const newTodo = await response.json();
 
-  return Response.json({ todo });
+  return new Response(JSON.stringify(newTodo), {
+    status: 201,
+    headers: { "Content-Type": "application/json" },
+  });
 }
 export async function PATCH(request: Request) {
   const { id, isDone }: { id: string; isDone: boolean } = await request.json();

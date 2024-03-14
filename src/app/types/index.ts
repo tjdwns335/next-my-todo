@@ -10,6 +10,11 @@ export type TodoData = {
   isDone: boolean;
 };
 
+export type newTodo = {
+  title: string;
+  contents: string;
+};
+
 export type companyInfo = {
   name: string;
   description: string;
@@ -18,4 +23,8 @@ export type companyInfo = {
 
 export type TodoProps = {
   isActive: boolean;
+};
+
+export type params = {
+  id: string;
 };

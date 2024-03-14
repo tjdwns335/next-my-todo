@@ -3,21 +3,25 @@ import React from "react";
 import TodoList from "@/components/todo/TodoList";
 import TodoForm from "@/components/todo/TodoForm";
 import { useRouter } from "next/navigation";
+import { TodoPageStyle } from "../style";
 
 function TodoCSRPage() {
   const router = useRouter();
   return (
-    <div className="w-4/5 m-auto">
+    <div className={TodoPageStyle.wrap}>
       <TodoForm />
       <TodoList isActive={false} />
       <TodoList isActive={true} />
-      <button
-        onClick={() => {
-          router.push("/report");
-        }}
-      >
-        할일정보통계보러가기
-      </button>
+      <div className={TodoPageStyle.LinkWrap}>
+        <button
+          className={TodoPageStyle.LinkAndButton}
+          onClick={() => {
+            router.push("/report");
+          }}
+        >
+          할 일 정보통계 보러가기
+        </button>
+      </div>
     </div>
   );
 }
