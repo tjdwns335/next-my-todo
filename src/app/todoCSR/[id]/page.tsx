@@ -5,7 +5,7 @@ import {
   getTodoById,
 } from "@/app/queryFunction";
 import { detailStyle, todoListStyle } from "@/app/style";
-import { TodoData, Todos, newTodo, params } from "@/app/types";
+import { Todos, newTodo, params } from "@/app/types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -17,6 +17,7 @@ function DetailPage({ params }: { params: params }) {
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
   const { id } = params;
+
   const {
     data: todo,
     isLoading,
