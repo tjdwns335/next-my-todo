@@ -1,5 +1,4 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Todos, companyInfo } from "../types";
 import {
   changeTodo,
   deleteTodoMutationFunction,
@@ -11,6 +10,8 @@ import {
 } from "../queryFunction";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+
+import type { Todos, companyInfo } from "../types";
 
 export const useTodosQuery = () => {
   const {

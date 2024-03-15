@@ -5,10 +5,11 @@ import {
   useTodosQueryById,
 } from "@/app/querys";
 import { detailStyle, todoListStyle } from "@/app/style";
-import { newTodo, params } from "@/app/types";
 import Error from "@/components/todo/Error";
 import Loading from "@/components/todo/Loading";
 import React, { useState } from "react";
+
+import type { newTodo, params } from "@/app/types";
 
 function DetailPage({ params }: { params: params }) {
   const { deleteMutation } = useDeleteTodoMutationById();

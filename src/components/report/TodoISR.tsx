@@ -1,5 +1,6 @@
 import { reportStyle } from "@/app/style";
-import { Todos } from "@/app/types";
+
+import type { Todos } from "@/app/types";
 
 const TodoISR = async () => {
   const response = await fetch(`http://localhost:4000/todos`, {

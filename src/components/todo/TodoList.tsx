@@ -1,6 +1,5 @@
 "use client";
 import { todoListStyle } from "@/app/style";
-import { TodoProps } from "@/app/types";
 import React from "react";
 import DetailButton from "./DetailButton";
 import Loading from "./Loading";
@@ -10,6 +9,8 @@ import {
   useSwitchTodoMutation,
   useTodosQuery,
 } from "@/app/querys";
+
+import type { TodoProps } from "@/app/types";
 
 function TodoList({ isActive }: TodoProps) {
   const { todos, isLoading, isError } = useTodosQuery();

@@ -1,6 +1,7 @@
 import { todoListStyle } from "@/app/style";
-import { TodoProps, Todos } from "@/app/types";
 import React from "react";
+
+import type { TodoProps, Todos } from "@/app/types";
 
 const TodoSSR = async ({ isActive }: TodoProps) => {
   const response = await fetch(`http://localhost:4000/todos`, {

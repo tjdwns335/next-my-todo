@@ -1,4 +1,4 @@
-import { TodoData, Todos, companyInfo, newTodo } from "../types";
+import type { TodoData, Todos, companyInfo, newTodo } from "../types";
 
 export const getCompanyInfo = async (): Promise<companyInfo> => {
   const response = await fetch("http://localhost:4000/companyInfo");
