@@ -1,21 +1,12 @@
 "use client";
-import { getCompanyInfo } from "@/app/queryFunction";
 import { aboutStyle } from "@/app/style";
-import { companyInfo } from "@/app/types";
-import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import Loading from "../todo/Loading";
 import Error from "../todo/Error";
+import { useCompanyInfoQuery } from "@/app/querys";
 
 function AboutPages() {
-  const {
-    data: companyInfo,
-    isLoading,
-    isError,
-  } = useQuery<companyInfo, Error>({
-    queryKey: ["companyInfo"],
-    queryFn: getCompanyInfo,
-  });
+  const { companyInfo, isLoading, isError } = useCompanyInfoQuery();
 
   if (isLoading)
     return (

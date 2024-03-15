@@ -4,6 +4,7 @@ import {
   deleteTodoMutationFunction,
   getTodoById,
 } from "@/app/queryFunction";
+import { useTodosQueryById } from "@/app/querys";
 import { detailStyle, todoListStyle } from "@/app/style";
 import { Todos, newTodo, params } from "@/app/types";
 import Error from "@/components/todo/Error";
@@ -20,14 +21,7 @@ function DetailPage({ params }: { params: params }) {
   const [contents, setContents] = useState("");
   const { id } = params;
 
-  const {
-    data: todo,
-    isLoading,
-    isError,
-  } = useQuery<Todos[], Error>({
-    queryKey: ["todos"],
-    queryFn: () => getTodoById(id),
-  });
+  const { todo, isLoading, isError } = useTodosQueryById(id);
 
   const deleteMutation = useMutation({
     mutationFn: deleteTodoMutationFunction,

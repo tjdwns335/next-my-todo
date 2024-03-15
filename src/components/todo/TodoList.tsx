@@ -1,27 +1,20 @@
 "use client";
 import { todoListStyle } from "@/app/style";
-import { TodoProps, Todos } from "@/app/types";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { TodoProps } from "@/app/types";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import DetailButton from "./DetailButton";
 import {
   deleteTodoMutationFunction,
-  getTodoList,
   switchTodoMutationFunction,
 } from "@/app/queryFunction";
 import Loading from "./Loading";
 import Error from "./Error";
+import { useTodosQuery } from "@/app/querys";
 
 function TodoList({ isActive }: TodoProps) {
   const queryClient = useQueryClient();
-  const {
-    data: todos,
-    isLoading,
-    isError,
-  } = useQuery<Todos[], Error>({
-    queryKey: ["todos"],
-    queryFn: getTodoList,
-  });
+  const { todos, isLoading, isError } = useTodosQuery();
 
   const switchTodoMutation = useMutation({
     mutationFn: switchTodoMutationFunction,
