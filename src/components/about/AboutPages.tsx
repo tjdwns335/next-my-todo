@@ -4,6 +4,8 @@ import { aboutStyle } from "@/app/style";
 import { companyInfo } from "@/app/types";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import Loading from "../todo/Loading";
+import Error from "../todo/Error";
 
 function AboutPages() {
   const {
@@ -15,8 +17,18 @@ function AboutPages() {
     queryFn: getCompanyInfo,
   });
 
-  if (isLoading) return <div>로딩중....</div>;
-  if (isError) return <div>Error fetching data</div>;
+  if (isLoading)
+    return (
+      <>
+        <Loading />
+      </>
+    );
+  if (isError)
+    return (
+      <>
+        <Error />
+      </>
+    );
   return (
     <>
       {companyInfo && (

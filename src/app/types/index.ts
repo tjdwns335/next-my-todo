@@ -4,16 +4,9 @@ export type Todos = {
   contents: string;
   isDone: boolean;
 };
-export type TodoData = {
-  title: string;
-  contents: string;
-  isDone: boolean;
-};
+export type TodoData = Omit<Todos, "id">;
 
-export type newTodo = {
-  title: string;
-  contents: string;
-};
+export type newTodo = Omit<Todos, "id" | "isDone">;
 
 export type companyInfo = {
   name: string;
@@ -25,6 +18,4 @@ export type TodoProps = {
   isActive: boolean;
 };
 
-export type params = {
-  id: string;
-};
+export type params = Pick<Todos, "id">;

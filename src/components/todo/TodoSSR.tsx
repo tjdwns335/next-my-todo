@@ -3,7 +3,7 @@ import { TodoProps, Todos } from "@/app/types";
 import React from "react";
 
 const TodoSSR = async ({ isActive }: TodoProps) => {
-  const response = await fetch("http://localhost:4000/todos", {
+  const response = await fetch(`http://localhost:4000/todos`, {
     cache: "no-cache",
   });
   const todos: Todos[] = await response.json();

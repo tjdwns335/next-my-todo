@@ -6,6 +6,8 @@ import {
 } from "@/app/queryFunction";
 import { detailStyle, todoListStyle } from "@/app/style";
 import { Todos, newTodo, params } from "@/app/types";
+import Error from "@/components/todo/Error";
+import Loading from "@/components/todo/Loading";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -64,8 +66,18 @@ function DetailPage({ params }: { params: params }) {
     );
   };
 
-  if (isLoading) return <div>로딩중....</div>;
-  if (isError) return <div>Error fetching data</div>;
+  if (isLoading)
+    return (
+      <>
+        <Loading />
+      </>
+    );
+  if (isError)
+    return (
+      <>
+        <Error />
+      </>
+    );
 
   return (
     <div>

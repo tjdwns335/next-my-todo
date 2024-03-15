@@ -57,3 +57,7 @@ export const detailStyle = {
   title: "inline-block border border-solid border-amber-300 w-2/5 indent-1 p-2",
   text: "inline-block border border-solid border-amber-300 w-3/5 indent-1 p-2",
 };
+
+export const stateStyle = {
+  wrap: "flex items-center justify-center",
+};

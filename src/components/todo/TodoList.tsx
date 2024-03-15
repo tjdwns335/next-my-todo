@@ -9,6 +9,8 @@ import {
   getTodoList,
   switchTodoMutationFunction,
 } from "@/app/queryFunction";
+import Loading from "./Loading";
+import Error from "./Error";
 
 function TodoList({ isActive }: TodoProps) {
   const queryClient = useQueryClient();
@@ -56,8 +58,18 @@ function TodoList({ isActive }: TodoProps) {
     return isActive ? todoListStyle.cancelButton : todoListStyle.doneButton;
   };
 
-  if (isLoading) return <div>로딩중....</div>;
-  if (isError) return <div>Error fetching data</div>;
+  if (isLoading)
+    return (
+      <>
+        <Loading />
+      </>
+    );
+  if (isError)
+    return (
+      <>
+        <Error />
+      </>
+    );
   return (
     <div className={todoListStyle.wrap}>
       <h1 className={todoListStyle.todoTitle}>
