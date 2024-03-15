@@ -1,63 +1,45 @@
 "use client";
+import { changeTodo, deleteTodoMutationFunction } from "@/app/queryFunction";
 import {
-  changeTodo,
-  deleteTodoMutationFunction,
-  getTodoById,
-} from "@/app/queryFunction";
-import { useTodosQueryById } from "@/app/querys";
+  changeTodoById,
+  useDeleteTodoMutationById,
+  useTodosQueryById,
+} from "@/app/querys";
 import { detailStyle, todoListStyle } from "@/app/style";
-import { Todos, newTodo, params } from "@/app/types";
+import { newTodo, params } from "@/app/types";
 import Error from "@/components/todo/Error";
 import Loading from "@/components/todo/Loading";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 function DetailPage({ params }: { params: params }) {
-  const queryClient = useQueryClient();
-  const router = useRouter();
+  const { deleteMutation } = useDeleteTodoMutationById();
+  const { title, setTitle, contents, setContents, changeTodoMutation } =
+    changeTodoById();
   const [change, setChange] = useState(false);
-  const [title, setTitle] = useState("");
-  const [contents, setContents] = useState("");
+
   const { id } = params;
 
   const { todo, isLoading, isError } = useTodosQueryById(id);
 
-  const deleteMutation = useMutation({
-    mutationFn: deleteTodoMutationFunction,
-  });
-  const changeTodoMutation = useMutation({
-    mutationFn: changeTodo,
-  });
-
   const onClickDeleteTodoHandler = (id: string) => {
     const deleteConfirm = window.confirm("삭제하시겠습니까?");
     if (deleteConfirm) {
-      deleteMutation.mutate(id, {
-        onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: ["todos"] });
-          router.push("/todoCSR");
-        },
-      });
+      deleteMutation.mutate(id);
     }
   };
 
   const onClickChange = (id: string) => {
     setChange((prev) => !prev);
+    if (!title || !contents) {
+      return;
+    }
     const newTodoData: newTodo = {
       title,
       contents,
     };
-    changeTodoMutation.mutate(
-      { id, newTodo: newTodoData },
-      {
-        onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: ["todos"] });
-          setTitle("");
-          setContents("");
-        },
-      }
-    );
+    changeTodoMutation.mutate({ id, newTodo: newTodoData });
   };
 
   if (isLoading)

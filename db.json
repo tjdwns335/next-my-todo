@@ -19,8 +19,14 @@
     },
     {
       "id": "2ab9",
-      "title": "Next공부",
-      "contents": "NEXT공부를 해봅시다",
+      "title": "NEXT 공부",
+      "contents": "NEXT 공부해보자",
+      "isDone": false
+    },
+    {
+      "id": "373d",
+      "title": "test",
+      "contents": "test",
       "isDone": false
     }
   ]

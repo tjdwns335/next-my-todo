@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Todos, companyInfo } from "../types";
 import {
+  changeTodo,
   deleteTodoMutationFunction,
   getCompanyInfo,
   getTodoById,
@@ -9,6 +10,7 @@ import {
   switchTodoMutationFunction,
 } from "../queryFunction";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export const useTodosQuery = () => {
   const {
@@ -94,4 +96,33 @@ export const useAddTodoMutation = () => {
   });
 
   return { title, setTitle, contents, setContents, newTodoMutation };
+};
+
+export const useDeleteTodoMutationById = () => {
+  const queryClient = useQueryClient();
+  const router = useRouter();
+  const deleteMutation = useMutation({
+    mutationFn: deleteTodoMutationFunction,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["todos"] });
+      router.push("/todoCSR");
+    },
+  });
+  return { deleteMutation };
+};
+
+export const changeTodoById = () => {
+  const queryClient = useQueryClient();
+  const [title, setTitle] = useState("");
+  const [contents, setContents] = useState("");
+  const changeTodoMutation = useMutation({
+    mutationFn: changeTodo,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["todos"] });
+      setTitle("");
+      setContents("");
+    },
+  });
+
+  return { title, setTitle, contents, setContents, changeTodoMutation };
 };
