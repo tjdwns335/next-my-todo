@@ -1,50 +1,29 @@
 "use client";
 import { todoListStyle } from "@/app/style";
 import { TodoProps } from "@/app/types";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import DetailButton from "./DetailButton";
-import {
-  deleteTodoMutationFunction,
-  switchTodoMutationFunction,
-} from "@/app/queryFunction";
 import Loading from "./Loading";
 import Error from "./Error";
-import { useTodosQuery } from "@/app/querys";
+import {
+  useDeleteTodoMutation,
+  useSwitchTodoMutation,
+  useTodosQuery,
+} from "@/app/querys";
 
 function TodoList({ isActive }: TodoProps) {
-  const queryClient = useQueryClient();
   const { todos, isLoading, isError } = useTodosQuery();
-
-  const switchTodoMutation = useMutation({
-    mutationFn: switchTodoMutationFunction,
-  });
+  const { switchTodo } = useSwitchTodoMutation();
+  const { deleteTodo } = useDeleteTodoMutation();
 
   const onClickSwitchTodoHandler = (id: string, isDone: boolean) => {
-    switchTodoMutation.mutate(
-      { id, isDone },
-      {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
-            queryKey: ["todos"],
-          });
-        },
-      }
-    );
+    switchTodo(id, isDone);
   };
-
-  const deleteTodoMutation = useMutation({
-    mutationFn: deleteTodoMutationFunction,
-  });
 
   const onClickDeleteTodoHandler = (id: string) => {
     const deleteConfirm = window.confirm("삭제하시겠습니까?");
     if (deleteConfirm) {
-      deleteTodoMutation.mutate(id, {
-        onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: ["todos"] });
-        },
-      });
+      deleteTodo(id);
     }
   };
   const buttonColor = (): string => {

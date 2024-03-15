@@ -1,19 +1,11 @@
 "use client";
-import { newTodoMutationFunction } from "@/app/queryFunction";
+import { useAddTodoMutation } from "@/app/querys";
 import { formStyle } from "@/app/style";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { kMaxLength } from "buffer";
-import React, { useState } from "react";
+import React from "react";
 
 function TodoForm() {
-  const queryClient = useQueryClient();
-
-  const [title, setTitle] = useState("");
-  const [contents, setContents] = useState("");
-
-  const newTodoMutation = useMutation({
-    mutationFn: newTodoMutationFunction,
-  });
+  const { title, setTitle, contents, setContents, newTodoMutation } =
+    useAddTodoMutation();
 
   const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -21,16 +13,7 @@ function TodoForm() {
       alert("제목과 내용을 입력해주세요");
       return;
     }
-    newTodoMutation.mutate(
-      { title, contents, isDone: false },
-      {
-        onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: ["todos"] });
-          setTitle("");
-          setContents("");
-        },
-      }
-    );
+    newTodoMutation.mutate({ title, contents, isDone: false });
   };
   return (
     <form
