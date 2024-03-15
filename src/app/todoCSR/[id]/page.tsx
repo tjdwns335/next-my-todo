@@ -1,5 +1,4 @@
 "use client";
-import { changeTodo, deleteTodoMutationFunction } from "@/app/queryFunction";
 import {
   changeTodoById,
   useDeleteTodoMutationById,
@@ -9,8 +8,6 @@ import { detailStyle, todoListStyle } from "@/app/style";
 import { newTodo, params } from "@/app/types";
 import Error from "@/components/todo/Error";
 import Loading from "@/components/todo/Loading";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 function DetailPage({ params }: { params: params }) {
