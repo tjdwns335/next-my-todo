@@ -2,12 +2,12 @@
 
 - (1) 애플리케이션 전역에서 사용할 내비게이션 만들기
     - 다음 페이지에 접근할 수 있는 내비게이션 바를 만듭니다.
-    - [x]about, report, todos-csr, todos-ssr
-    - [x]RootLayout에 삽입하여 모든 페이지에서 접근이 가능케합니다.
+    -[x] about, report, todos-csr, todos-ssr
+    -[x] RootLayout에 삽입하여 모든 페이지에서 접근이 가능케합니다.
 - (2) react-query 세팅
-    - [x]QueryProvider를 이용하여 react-query를 세팅합니다.
+    -[x] QueryProvider를 이용하여 react-query를 세팅합니다.
 - (3) json-server 세팅
-    - [x]데이터베이스 서버로 가정할 json-server를 생성합니다.
+    -[x] 데이터베이스 서버로 가정할 json-server를 생성합니다.
     - [x]todos
     - [x]companyInfo
     - [x]db.json 
